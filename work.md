@@ -1,0 +1,3 @@
+# BalitaBlogProject!
+
+* Default folder structure
