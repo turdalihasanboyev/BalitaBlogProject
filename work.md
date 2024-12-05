@@ -1,5 +1,3 @@
 # BalitaBlogProject!
-
-* Default folder structure
-
-* Default settings
+* Default loyiha strukturasi qurildi
+* Default loyiha sozlamalari qurildi

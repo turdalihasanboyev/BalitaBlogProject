@@ -1,7 +1,5 @@
 from django.shortcuts import render
-
 from django.views import View
-
 
 class CustomPageNotFoundPageView(View):
     template_name = '404.html'
