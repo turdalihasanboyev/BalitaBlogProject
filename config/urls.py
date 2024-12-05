@@ -15,8 +15,39 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path, include
+
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.static import serve
+
+from django.conf.urls import handler404
+
+from .errors import CustomPageNotFoundPageView
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('balita/', admin.site.urls),
+
+    # ckeditor
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+
+    # media, static
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+
+    # local path
+    path('', include('apps.article.urls')),
+    path('', include('apps.about.urls')),
+    path('', include('apps.user.urls')),
+    path('', include('apps.contact.urls')),
+    path('', include('apps.common.urls')),
+    path('', include('apps.category.urls')),
 ]
+
+handler404 = CustomPageNotFoundPageView.as_view()
+
+# static and media files
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
