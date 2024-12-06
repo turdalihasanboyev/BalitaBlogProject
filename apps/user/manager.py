@@ -1,5 +1,5 @@
-import re
 from django.contrib.auth.models import UserManager
+import re
 
 
 class CustomUserManager(UserManager):
