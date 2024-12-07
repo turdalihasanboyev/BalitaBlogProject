@@ -42,14 +42,15 @@
                               <div class="owl-carousel owl-theme home-slider">
                                     {% for banner in banner %}
                                     <div>
-                                          <a href="{% url 'article-detail' banner.slug %}" class="a-block d-flex align-items-center height-lg"
+                                          <a href="{% url 'article-detail' banner.slug %}"
+                                                class="a-block d-flex align-items-center height-lg"
                                                 style="background-image: url('{{ banner.image_1.url }}'); ">
                                                 <div class="text half-to-full">
                                                       <div class="post-meta">
                                                             <span class="category">{{ banner.category.name }}</span>
-                                                            <span class="mr-2">{{ baner.created_at|date }} </span> &bullet;
-                                                            <span class="ml-2"><span class="fa fa-comments"></span>
-                                                            {{ banner.comments_article.count }}</span>
+                                                            <span class="mr-2">{{ baner.created_at|date }} </span>
+                                                            &bullet;
+                                                            <span class="ml-2"><span class="fa fa-comments"></span> {{ banner.comments_article.count }}</span>
                                                       </div>
                                                       <h3>{{ banner.name }}</h3>
                                                       <p>{{ banner.description_1|slice:':90'|safe }}</p>
@@ -63,7 +64,8 @@
                   <div class="row">
                         {% for article in last_articles %}
                         <div class="col-md-6 col-lg-4">
-                              <a href="{{ article.get_absolute_url }}" class="a-block d-flex align-items-center height-md"
+                              <a href="{{ article.get_absolute_url }}"
+                                    class="a-block d-flex align-items-center height-md"
                                     style="background-image: url('{{ article.image_1.url }}'); ">
                                     <div class="text">
                                           <div class="post-meta">
@@ -98,7 +100,8 @@
                                                 <div class="blog-content-body">
                                                       <div class="post-meta">
                                                             <span class="category">{{ article.category.name }}</span>
-                                                            <span class="mr-2">{{ article.created_at|date }} </span> &bullet;
+                                                            <span class="mr-2">{{ article.created_at|date }} </span>
+                                                            &bullet;
                                                             <span class="ml-2"><span class="fa fa-comments"></span> {{ article.comments_article.count }}</span>
                                                       </div>
                                                       <h2>{{ article.name }}</h2>
@@ -119,11 +122,13 @@
                                           <div class="post-entry-horzontal">
                                                 <a href="{{ article.get_absolute_url }}">
                                                       <div class="image element-animate" data-animate-effect="fadeIn"
-                                                            style="background-image: url({{ article.image_1.url }});"></div>
+                                                            style="background-image: url({{ article.image_1.url }});">
+                                                      </div>
                                                       <span class="text">
                                                             <div class="post-meta">
                                                                   <span class="category">{{ article.category }}</span>
-                                                                  <span class="mr-2">{{ article.created_at|date }} </span> &bullet;
+                                                                  <span class="mr-2">{{ article.created_at|date }}
+                                                                  </span> &bullet;
                                                                   <span class="ml-2"><span class="fa fa-comments"></span> {{ article.comments_article.count }}</span>
                                                             </div>
                                                             <h2>{{ article.name }}</h2>

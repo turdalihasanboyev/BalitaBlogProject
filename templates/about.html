@@ -22,15 +22,7 @@
                         <li class="nav-item">
                               <a class="nav-link" href="{% url 'home' %}">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
-                              <div class="dropdown-menu" aria-labelledby="dropdown05">
-                                    {% for cat in categories %}
-                                    <a class="dropdown-item" href="category.html">{{ cat.name }}</a>
-                                    {% endfor %}
-                              </div>
-                        </li>
+                        {% include 'categories.html' %}
                         <li class="nav-item">
                               <a class="nav-link active" href="{% url 'about' %}">About</a>
                         </li>
@@ -50,8 +42,7 @@
                               <div class="row">
                                     <div class="col-md-12">
                                           <h2 class="mb-4">Hi There! I'm Meagan Smith</h2>
-                                          <p class="mb-5"><img src="{% static '' %}images/img_6.jpg"
-                                                      alt="Image placeholder" class="img-fluid"></p>
+                                          <p class="mb-5"><img src="{% static '' %}images/img_6.jpg" alt="Image placeholder" class="img-fluid"></p>
                                           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum minima
                                                 eveniet recusandae suscipit eum laboriosam fugit amet deleniti iste et.
                                                 Ad dolores, necessitatibus non saepe tenetur impedit commodi quibusdam
@@ -82,11 +73,13 @@
                                           <div class="post-entry-horzontal">
                                                 <a href="/single/{{ article.slug }}">
                                                       <div class="image"
-                                                            style="background-image: url({{ article.image_1.url }});"></div>
+                                                            style="background-image: url({{ article.image_1.url }});">
+                                                      </div>
                                                       <span class="text">
                                                             <div class="post-meta">
                                                                   <span class="category">{{ article.category }}</span>
-                                                                  <span class="mr-2">{{ article.created_at|date }} </span> &bullet;
+                                                                  <span class="mr-2">{{ article.created_at|date }}
+                                                                  </span> &bullet;
                                                                   <span class="ml-2"><span class="fa fa-comments"></span> {{ article.comments_article.count }}</span>
                                                             </div>
                                                             <h2>{{ article.name }} </h2>

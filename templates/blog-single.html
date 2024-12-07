@@ -51,18 +51,21 @@
                                     <p>{{ article.description_3 }}</p>
                                     <div class="row mb-5">
                                           <div class="col-md-12 mb-4 element-animate">
-                                                <img src="{{ article.image_1.url }}" alt="Image placeholder" class="img-fluid">
+                                                <img src="{{ article.image_1.url }}" alt="Image placeholder"
+                                                      class="img-fluid">
                                           </div>
                                           <div class="col-md-6 mb-4 element-animate">
-                                                <img src="{{ article.image_2.url }}" alt="Image placeholder" class="img-fluid">
+                                                <img src="{{ article.image_2.url }}" alt="Image placeholder"
+                                                      class="img-fluid">
                                           </div>
                                           <div class="col-md-6 mb-4 element-animate">
-                                                <img src="{{ article.image_3.url }}" alt="Image placeholder" class="img-fluid">
+                                                <img src="{{ article.image_3.url }}" alt="Image placeholder"
+                                                      class="img-fluid">
                                           </div>
                                     </div>
                               </div>
                               <div class="pt-5">
-                                    <p>Category: <a href="#">{{ article.category.name }}</a> Tags: {% for tag in article.tags.all %}<a href="#">{{ tag.name }}</a>{% endfor %}</p>
+                                    <p>Category: <a href="/category/{{ article.category.slug }}">{{ article.category.name }}</a> Tags: {% for tag in article.tags.all %}<a href="/single/{{ article.slug }}">{{ tag.name }}</a>{% endfor %}</p>
                               </div>
                               <div class="pt-5">
                                     <h3 class="mb-5">{{ article.comments_article.count }} Comments</h3>
@@ -96,7 +99,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                       <label for="website">Website</label>
-                                                      <input type="url" class="form-control" name="web_site" id="website">
+                                                      <input type="url" class="form-control" name="web_site"
+                                                            id="website">
                                                 </div>
                                                 <div class="form-group">
                                                       <label for="message">Message</label>
@@ -126,7 +130,8 @@
                   <div class="row">
                         {% for article in related_articles %}
                         <div class="col-md-6 col-lg-4">
-                              <a href="{% url 'article-detail' article.slug %}" class="a-block d-flex align-items-center height-md"
+                              <a href="{% url 'article-detail' article.slug %}"
+                                    class="a-block d-flex align-items-center height-md"
                                     style="background-image: url('{{ article.image_1.url }}'); ">
                                     <div class="text">
                                           <div class="post-meta">

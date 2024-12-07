@@ -1,31 +1,12 @@
-from django.views import View
+from .models import CustomUser
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-from .models import CustomUser
-import re
 
 
-def validate_email(email):
-    # Email formatini tekshiradi
-    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-    return re.match(email_regex, email) is not None
-
-
-def validate_password(password):
-    # Parol minimum 8 ta belgidan iborat bo‘lishini tekshiradi
-    return len(password) >= 8
-
-
-class RegisterPageView(View):
-    template_name = 'register.html'
-
-    def get(self, request):
-        return render(request, self.template_name)
-
-    def post(self, request):
+def register_page_view(request):
+    if request.method == 'POST':
         try:
             email = request.POST.get('email')
             first_name = request.POST.get('first_name')
@@ -39,20 +20,10 @@ class RegisterPageView(View):
                 messages.error(request, 'Email allaqachon mavjud!')
                 return redirect('register')
             
-            # Emailni validatsiya qilish
-            if not validate_email(email):
-                messages.error(request, 'Email formati noto‘g‘ri!')
-                return redirect('register')
-
-            # Parol validatsiyasi
-            if not validate_password(password):
-                messages.error(request, 'Parol kamida 8 ta belgidan iborat bo‘lishi kerak!')
-                return redirect('register')
-
             if password != confirm_password:
                 messages.error(request, 'Parollar bir xil emas!')
                 return redirect('register')
-
+            
             user = CustomUser.objects.create_user(
                 email=email,
                 first_name=first_name,
@@ -67,15 +38,11 @@ class RegisterPageView(View):
         except Exception as e:
             messages.error(request, f"Xatolik yuz berdi: {str(e)}")
             return redirect('register')
+    
+    return render(request, 'register.html')
 
-
-class LoginPageView(View):
-    template_name = 'login.html'
-
-    def get(self, request):
-        return render(request, self.template_name)
-
-    def post(self, request):
+def login_page_view(request):
+    if request.method == 'POST':
         try:
             email = request.POST.get('email')
             password = request.POST.get('password')
@@ -92,14 +59,14 @@ class LoginPageView(View):
         except Exception as e:
             messages.error(request, f"Xatolik yuz berdi: {str(e)}")
             return redirect('login')
+        
+    return render(request, 'login.html')
 
-
-@method_decorator(login_required, name='dispatch')
-class LogoutView(View):
-    def get(self, request):
-        try:
-            logout(request)
-            messages.success(request, 'Tizimdan muvaffaqiyatli chiqdingiz!')
-        except Exception as e:
-            messages.error(request, f"Xatolik yuz berdi: {str(e)}")
-        return redirect('home')
+@login_required
+def logout_view(request):
+    try:
+        logout(request)
+        messages.success(request, 'Tizimdan muvaffaqiyatli chiqdingiz!')
+    except Exception as e:
+        messages.error(request, f"Xatolik yuz berdi: {str(e)}")
+    return redirect('home')

@@ -20,7 +20,7 @@
                 <p class="social">
                     <a href="https://www.facebook.com/" class="p-2"><span class="fa fa-facebook"></span></a>
                     <a href="https://www.x.com/" class="p-2"><span class="fa fa-twitter"></span></a>
-                    <a href="https://www.instagram.com/" class="p-2"><span class="fa fa-instagram"></span></a>
+                    <a href="https://www.instagram.com/turdali.hasanboyev.07/" class="p-2"><span class="fa fa-instagram"></span></a>
                     <a href="https://www.youtube.com/" class="p-2"><span class="fa fa-youtube-play"></span></a>
                 </p>
             </div>
@@ -40,8 +40,7 @@
                             <div class="post-meta">
                                 <span class="mr-2">{{ article.created_at|date }} </span>
                                 &bullet;
-                                <span class="ml-2"><span class="fa fa-comments"></span>
-                                {{ article.comments_article.count }}</span>
+                                <span class="ml-2"><span class="fa fa-comments"></span> {{ article.comments_article.count }}</span>
                             </div>
                         </div>
                     </a>
@@ -55,7 +54,7 @@
         <h3 class="heading">Categories</h3>
         <ul class="categories">
             {% for cat in categories %}
-            <li><a href="#">{{ cat.name}} <span>({{ cat.articles_category.count }})</span></a></li>
+            <li><a href="{% url 'category' cat.slug %}">{{ cat.name}} <span>({{ cat.articles_category.count }})</span></a></li>
             {% endfor %}
         </ul>
     </div>

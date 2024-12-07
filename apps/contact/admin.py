@@ -20,4 +20,5 @@ class ContactAdmin(admin.ModelAdmin):
         'created_at',
         'updated_at',
     )
+    
 admin.site.register(Contact, ContactAdmin)

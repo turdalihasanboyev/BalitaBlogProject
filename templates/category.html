@@ -5,34 +5,34 @@
 {% block title %}Balita Category{% endblock %}
 
 {% block content %}
-            <div class="container logo-wrap">
-                  <div class="row pt-5">
-                        <div class="col-12 text-center">
-                              <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu"
-                                    role="button" aria-expanded="false" aria-controls="navbarMenu"><span
-                                          class="burger-lines"></span></a>
-                              <h1 class="site-logo"><a href="{% url 'home' %}">Balita</a></h1>
-                        </div>
-                  </div>
+
+<div class="container logo-wrap">
+      <div class="row pt-5">
+            <div class="col-12 text-center">
+                  <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button"
+                        aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
+                  <h1 class="site-logo"><a href="{% url 'home' %}">Balita</a></h1>
             </div>
-            <nav class="navbar navbar-expand-md  navbar-light bg-light">
-                  <div class="container">
-                        <div class="collapse navbar-collapse" id="navbarMenu">
-                              <ul class="navbar-nav mx-auto">
-                                    <li class="nav-item">
-                                          <a class="nav-link" href="{% url 'home' %}">Home</a>
-                                    </li>
-                                    {% include 'categories.html' %}
-                                    <li class="nav-item">
-                                          <a class="nav-link" href="{% url 'about' %}">About</a>
-                                    </li>
-                                    <li class="nav-item">
-                                          <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-                                    </li>
-                              </ul>
-                        </div>
-                  </div 
-            </nav>
+      </div>
+</div>
+<nav class="navbar navbar-expand-md  navbar-light bg-light">
+      <div class="container">
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                  <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                              <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        </li>
+                        {% include 'categories.html' %}
+                        <li class="nav-item">
+                              <a class="nav-link" href="{% url 'about' %}">About</a>
+                        </li>
+                        <li class="nav-item">
+                              <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                        </li>
+                  </ul>
+            </div>
+      </div 
+</nav>
       </header>
 
       <section class="site-section">
@@ -50,11 +50,13 @@
                                           <div class="post-entry-horzontal">
                                                 <a href="{% url 'article-detail' article.slug %}">
                                                       <div class="image element-animate" data-animate-effect="fadeIn"
-                                                            style="background-image: url({{ article.image_1.url }});"></div>
+                                                            style="background-image: url({{ article.image_1.url }});">
+                                                      </div>
                                                       <span class="text">
                                                             <div class="post-meta">
                                                                   <span class="category">{{ article.category }}</span>
-                                                                  <span class="mr-2">{{ article.created_at|date }} </span> &bullet;
+                                                                  <span class="mr-2">{{ article.created_at|date }}
+                                                                  </span> &bullet;
                                                                   <span class="ml-2"><span class="fa fa-comments"></span> {{ article.comments_article.count }}</span>
                                                             </div>
                                                             <h2>{{ article.name }}</h2>
@@ -72,4 +74,5 @@
                   </div>
             </div>
       </section>
+      
       {% endblock %}
