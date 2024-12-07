@@ -9,7 +9,6 @@ class HomePageView(View):
         last_articles = Article.objects.filter(is_active=True).order_by('-id')[:3]
         articles = Article.objects.filter(is_active=True).order_by('-created_at')[:8]
         more_articles = Article.objects.filter(is_active=True).order_by('-created_at')[:3]
-
         context = {
             'banner':  banner,
             'last_articles': last_articles,
@@ -24,19 +23,15 @@ class ArticleDetailView(View):
 
     def get(self, request, slug, *args, **kwargs):
         article = get_object_or_404(Article, slug__iexact=slug, is_active=True)
-        comments = Comment.objects.filter(is_active=True, article=article).order_by('-id')
-        related_articles = Article.objects.filter(is_active=True, category=article.category).order_by('-id')
-
+        related_articles = Article.objects.filter(is_active=True, category=article.category).order_by('-id').exclude(id=article.id)[:3]
         context = {
             'article': article,
-            'comments': comments,
             'related_articles': related_articles[:3],
         }
         return render(request, self.template_name, context)
     
     def post(self, request, slug, *args, **kwargs):
         article = get_object_or_404(Article, slug__iexact=slug, is_active=True)
-
         comment = Comment()
         comment.user = request.user
         comment.article = article
@@ -45,4 +40,4 @@ class ArticleDetailView(View):
         comment.web_site = request.POST.get('web_site')
         comment.comment = request.POST.get("comment")
         comment.save()
-        return redirect('article-detail', slug__exact=slug)
+        return redirect('article-detail', article.slug)

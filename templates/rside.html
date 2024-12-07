@@ -33,7 +33,7 @@
             <ul>
                 {% for article in popular_articles %}
                 <li>
-                    <a href>
+                    <a href="{{ article.get_absolute_url }}">
                         <img src="{{ article.image_1.url }}" alt="Image placeholder" class="mr-4">
                         <div class="text">
                             <h4>{{ article.name }}</h4>
