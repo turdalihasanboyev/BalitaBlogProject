@@ -4,8 +4,6 @@ from apps.article.models import Article, Comment
 
 
 class HomePageView(View):
-    template_name = 'index.html'
-
     def get(self, request, *args, **kwargs):
         banner = Article.objects.filter(for_banner=True, is_active=True).order_by('id')
         last_articles = Article.objects.filter(is_active=True).order_by('-id')[:3]
@@ -18,8 +16,7 @@ class HomePageView(View):
             'articles': articles,
             'more_articles': more_articles,
         }
-
-        return render(request, self.template_name, context)
+        return render(request, 'index.html', context)
     
 
 class ArticleDetailView(View):
@@ -28,14 +25,13 @@ class ArticleDetailView(View):
     def get(self, request, slug, *args, **kwargs):
         article = get_object_or_404(Article, slug__iexact=slug, is_active=True)
         comments = Comment.objects.filter(is_active=True, article=article).order_by('-id')
-        related_articles = Article.objects.filter(is_active=True, category=article.category).order_by('-id')[:3]
+        related_articles = Article.objects.filter(is_active=True, category=article.category).order_by('-id')
 
         context = {
             'article': article,
             'comments': comments,
-            'related_articles': related_articles,
+            'related_articles': related_articles[:3],
         }
-
         return render(request, self.template_name, context)
     
     def post(self, request, slug, *args, **kwargs):
@@ -48,7 +44,5 @@ class ArticleDetailView(View):
         comment.email = request.POST.get('email')
         comment.web_site = request.POST.get('web_site')
         comment.comment = request.POST.get("comment")
-
         comment.save()
-
         return redirect('article-detail', slug__exact=slug)

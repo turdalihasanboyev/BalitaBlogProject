@@ -12,9 +12,7 @@ class TagAdmin(admin.ModelAdmin):
         'updated_at',
     )
     ordering = ('id',)
-    search_fields = (
-        'name',
-    )
+    search_fields = ('name',)
     readonly_fields = (
         'created_at',
         'updated_at',
@@ -39,9 +37,7 @@ class CategoryAdmin(admin.ModelAdmin):
         'updated_at',
     )
     ordering = ('-id',)
-    search_fields = (
-        'name',
-    )
+    search_fields = ('name',)
     readonly_fields = (
         'created_at',
         'updated_at',
