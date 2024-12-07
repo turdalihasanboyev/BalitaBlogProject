@@ -23,6 +23,8 @@ class ArticleDetailView(View):
 
     def get(self, request, slug, *args, **kwargs):
         article = get_object_or_404(Article, slug__iexact=slug, is_active=True)
+        article.views =+ 1
+        article.save()
         related_articles = Article.objects.filter(is_active=True, category=article.category).order_by('-id').exclude(id=article.id)[:3]
         context = {
             'article': article,
