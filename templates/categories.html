@@ -1,0 +1,11 @@
+{% load static %}
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">Categories</a>
+    <div class="dropdown-menu" aria-labelledby="dropdown05">
+        {% for cat in categories %}
+        <a class="dropdown-item" href="category.html">{{ cat.name }}</a>
+        {% endfor %}
+    </div>
+</li>

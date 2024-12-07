@@ -22,20 +22,12 @@
                         <li class="nav-item">
                               <a class="nav-link active" href="/">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
-                              <div class="dropdown-menu" aria-labelledby="dropdown05">
-                                    {% for cat in categories %}
-                                    <a class="dropdown-item" href="category.html">{{ cat.name }}</a>
-                                    {% endfor %}
-                              </div>
+                        {% include 'categories.html' %}
+                        <li class="nav-item">
+                              <a class="nav-link" href="{% url 'about' %}">About</a>
                         </li>
                         <li class="nav-item">
-                              <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                              <a class="nav-link" href="contact.html">Contact</a>
+                              <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                         </li>
                   </ul>
             </div>
@@ -134,8 +126,7 @@
                                                                   <span class="mr-2">{{ article.created_at|date }} </span> &bullet;
                                                                   <span class="ml-2"><span class="fa fa-comments"></span> {{ article.comments_article.count }}</span>
                                                             </div>
-                                                            <h2>There’s a Cool New Way for Men to Wear Socks and Sandals
-                                                            </h2>
+                                                            <h2>{{ article.name }}</h2>
                                                       </span>
                                                 </a>
                                           </div>
