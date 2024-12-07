@@ -9,7 +9,7 @@ env.read_env(os.path.join(BASE_DIR, ".env"))
 
 SECRET_KEY = env.str("SECRET_KEY", default="DEFAULT_SECRET_KEY")
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
