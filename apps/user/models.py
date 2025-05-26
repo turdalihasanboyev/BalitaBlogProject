@@ -14,14 +14,12 @@ class CustomUser(BaseModel, AbstractUser):
     objects = CustomUserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["first_name", "last_name"]
+    REQUIRED_FIELDS = []
 
     def __str__(self):
-        if self.get_full_name():
-            return f"{self.get_full_name()}"
         if self.email:
             return f"{self.email}"
-        
+
     class Meta:
         verbose_name = 'Foydalanuvchi'
         verbose_name_plural = 'Foydalanuvchilar'

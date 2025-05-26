@@ -55,11 +55,11 @@ class RegisterPageView(View):
 
             user = CustomUser.objects.create_user(
                 email=email,
+                password=password,
                 first_name=first_name,
                 last_name=last_name,
                 description=description,
                 image=image,
-                password=password,
             )
             user.save()
             messages.success(request, "Foydalanuvchi muvaffaqiyatli ro'yhatdan o'tdi!")

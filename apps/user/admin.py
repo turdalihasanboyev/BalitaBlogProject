@@ -59,6 +59,6 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         ('Create Super User', {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'first_name', 'last_name', 'description', 'image', 'is_active', 'is_staff', 'is_superuser',)}
+            'fields': ('email', 'password1', 'password2', 'is_staff', 'is_superuser',)}
         ),
     )
