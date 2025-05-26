@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: balita_db_container
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: balita_db
+      POSTGRES_USER: balita_db
+      POSTGRES_PASSWORD: balita_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - balita_postgres_data:/var/lib/postgresql/data
+  web:
+    build: .
+    image: balita_web_image
+    container_name: balita_web_container
+    ports:
+      - "7979:7979"
+    depends_on:
+      - db
+    restart: unless-stopped
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=False
+      - DJANGO_ALLOWED_HOSTS=*
+      - DJANGO_SUPERUSER_EMAIL=turdalihasanboyev144@gmail.com
+      - DJANGO_SUPERUSER_PASSWORD=123
+      - DATABASE_NAME=balita_db
+      - DATABASE_USER=balita_db
+      - DATABASE_PASSWORD=balita_db
+      - DATABASE_HOST=db
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             python manage.py createsuperuser --noinput || true &&
+             python manage.py runserver 0.0.0.0:7979"
+
+volumes:
+  balita_postgres_data:
