@@ -22,8 +22,10 @@ services:
     depends_on:
       - db
     restart: unless-stopped
-    volumes:
-      - .:/app
+    # volumes:
+    #   - .:/app
+    # volumes developer muhit uchun kod ozgarsa avto reload qiladi
+    # volumes olib tashlansa qolda update qilish kerak bu production uchun mos men hozir shu usulda ishlataman
     environment:
       - DEBUG=False
       - DJANGO_ALLOWED_HOSTS=*
