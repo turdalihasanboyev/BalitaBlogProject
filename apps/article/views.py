@@ -5,18 +5,23 @@ from apps.article.models import Article, Comment
 
 class HomePageView(View):
     def get(self, request, *args, **kwargs):
+        tag = request.GET.get('tag')
         banner = Article.objects.filter(for_banner=True, is_active=True).order_by('id')
         last_articles = Article.objects.filter(is_active=True).order_by('-id')[:3]
-        articles = Article.objects.filter(is_active=True).order_by('-created_at')[:8]
+        articles = Article.objects.filter(is_active=True).order_by('-created_at')
         more_articles = Article.objects.filter(is_active=True).order_by('-created_at')[:3]
+
+        if tag:
+            articles = articles.filter(is_active=True, tags__slug__iexact=tag)
+
         context = {
             'banner':  banner,
             'last_articles': last_articles,
-            'articles': articles,
+            'articles': articles[:8],
             'more_articles': more_articles,
         }
         return render(request, 'index.html', context)
-    
+
 
 class ArticleDetailView(View):
     template_name = 'blog-single.html'

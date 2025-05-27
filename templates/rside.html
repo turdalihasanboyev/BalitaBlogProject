@@ -1,14 +1,6 @@
 {% load static %}
 
 <div class="col-md-12 col-lg-4 sidebar">
-    <div class="sidebar-box search-form-wrap">
-        <form class="search-form">
-            <div class="form-group">
-                <span class="icon fa fa-search"></span>
-                <input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
-            </div>
-        </form>
-    </div>
 
     <div class="sidebar-box">
         <div class="bio text-center">
@@ -20,7 +12,7 @@
                 <p class="social">
                     <a href="https://www.facebook.com/" class="p-2"><span class="fa fa-facebook"></span></a>
                     <a href="https://www.x.com/" class="p-2"><span class="fa fa-twitter"></span></a>
-                    <a href="https://www.instagram.com/turdali.hasanboyev.07/" class="p-2"><span class="fa fa-instagram"></span></a>
+                    <a href="https://www.instagram.com/" class="p-2"><span class="fa fa-instagram"></span></a>
                     <a href="https://www.youtube.com/" class="p-2"><span class="fa fa-youtube-play"></span></a>
                 </p>
             </div>
@@ -63,7 +55,7 @@
         <h3 class="heading">Tags</h3>
         <ul class="tags">
             {% for tag in tags %}
-            <li><a href="#">{{ tag.name }}</a></li>
+            <li><a href="{% url 'home' %}?tag={{ tag.slug }}">{{ tag.name }}</a></li>
             {% endfor %}
         </ul>
     </div>
